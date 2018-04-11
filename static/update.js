@@ -1,3 +1,4 @@
+console.error('testing1')
 var chatSocket = new WebSocket(
         'ws://coding-clicker.herokuapp.com/clicks');
      chatSocket.onmessage = function(e) {
