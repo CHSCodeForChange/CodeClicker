@@ -18,9 +18,17 @@ def click(request):
 
 
 def userView(request):
-    code = Code.objects.first()
+    if Code.objects.count() == 0:
+        code = Code.objects.create()
+        # You can do something here as this should be the first person
+    else:
+        code = Code.objects.first()
     return render(request, 'userView.html', {'code':code})
 
 def displayView(request):
-    code = Code.objects.all().first()
+    if Code.objects.count() == 0:
+        code = Code.objects.create()
+        # You can do something here as this should be the first person
+    else:
+        code = Code.objects.first()
     return render(request, 'displayView.html', {'code':code})
