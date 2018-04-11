@@ -3,7 +3,7 @@ var chatSocket = new WebSocket(
         '/clicks/');
      chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
-        var message = data['message'];
+        var message = data['clicks'];
         document.querySelector('#click-count').value = "Clicks: " + message;
     };
     chatSocket.onclose = function(e) {
