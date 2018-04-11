@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'codeclicker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '',
+        'NAME': 'db',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -138,4 +138,3 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
