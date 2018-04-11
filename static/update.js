@@ -1,6 +1,5 @@
 var chatSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/clicks/');
+        'ws://coding-clicker.herokuapp.com/clicks');
      chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['clicks'];
