@@ -24,7 +24,7 @@ def userView(request):
 		# You can do something here as this should be the first person
 	else:
 		code = Code.objects.first()
-	return render(request, 'userView.html')
+	return render(request, 'userView.html', {'code': code})
 
 
 def displayView(request):
