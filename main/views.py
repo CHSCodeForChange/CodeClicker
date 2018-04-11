@@ -28,7 +28,7 @@ def userView(request):
 
 
 def displayView(request):
-	if Code.objects.count() == 0:
+  if Code.objects.count() == 0:
 		code = Code.objects.create()
 		# You can do something here as this should be the first person
 	else:

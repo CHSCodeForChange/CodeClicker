@@ -21,9 +21,8 @@ class ClickerConsumer(WebsocketConsumer):
 		else:
 			code = Code.objects.first()
 		# TODO: use addAmount instead
-		code.clicks = code.clicks + int(message)
+		code.clicks = code.clicks + 1 # int(message)
 		code.save()
-		print(code.clicks)
 
 		self.send(text_data=json.dumps({
 			'clicks': code.clicks
