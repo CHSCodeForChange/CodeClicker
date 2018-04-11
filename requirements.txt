@@ -3,3 +3,4 @@ django==1.11.7
 gunicorn==19.7.1
 dj-database-url==0.4.2
 psycopg2-binary==2.7.4
+whitenoise==3.3.1
