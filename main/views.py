@@ -24,9 +24,7 @@ def userView(request):
         # You can do something here as this should be the first person
     else:
         code = Code.objects.first()
-    return render(request, 'userView.html', {
-        'clicks_json': mark_safe(json.dumps(code))
-    })
+    return render(request, 'userView.html')
 
 
 def displayView(request):
