@@ -13,7 +13,6 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/sticky-footer.css" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="/static/css/header.css" rel="stylesheet" type="text/css">
-    <link href="/static/update.js" rel="script" type="text/plain">
   </head>
 
   <body>
@@ -31,6 +30,26 @@
     </div>
 
 
+    <script>
+        console.error('testing1')
+        var chatSocket = new WebSocket(
+                'ws://coding-clicker.herokuapp.com/clicks');
+        chatSocket.onmessage = function(e) {
+            var data = JSON.parse(e.data);
+            var message = data['clicks'];
+            document.querySelector('#click-count').value = "Clicks: " + message;
+        };
+        chatSocket.onclose = function(e) {
+            console.error('Socket closed unexpectedly');
+        };
+
+        document.querySelector('#clicker').onclick = function(e) {
+            console.info('testing')
+            chatSocket.send(JSON.stringify({
+                'addAmount': 1
+            }));
+        };
+    </script>
 
 
 
@@ -41,6 +60,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script src="/static/js/header.js"></script>
   </body>
 </html>
