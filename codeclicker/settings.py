@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'codeclicker.wsgi.application'
+
+ASGI_APPLICATION = 'codeclicker.routing.application'
 
 
 # Database

@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.utils.safestring import mark_safe
+import json
 
 from .models import Code
 
@@ -14,7 +15,7 @@ def click(request):
     code.clicks = code.clicks + 1
     code.save()
     print(code.clicks)
-    return redirect('/')
+    # return redirect('/')
 
 
 def userView(request):
@@ -23,7 +24,10 @@ def userView(request):
         # You can do something here as this should be the first person
     else:
         code = Code.objects.first()
-    return render(request, 'userView.html', {'code':code})
+    return render(request, 'userView.html', {
+        'clicks_json': mark_safe(json.dumps(code))
+    })
+
 
 def displayView(request):
     if Code.objects.count() == 0:
@@ -31,4 +35,5 @@ def displayView(request):
         # You can do something here as this should be the first person
     else:
         code = Code.objects.first()
-    return render(request, 'displayView.html', {'code':code})
+
+    return render(request, 'displayView.html', {'code': code})
