@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'codeclicker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db',
+        'NAME': '',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
