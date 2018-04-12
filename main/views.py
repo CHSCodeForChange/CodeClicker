@@ -14,9 +14,9 @@ def click(request):
     code.clicks = code.clicks + 1
     code.save()
 
-    if (code.clicks == code.prize):
+    if (code.clicks % code.prize == 0):
         print(121)
-        return redirect('/prize/')
+        return prize(request)
     return redirect('/')
 
 
