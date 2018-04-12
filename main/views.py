@@ -13,7 +13,10 @@ def click(request):
         code = Code.objects.first()
     code.clicks = code.clicks + 1
     code.save()
-    print(code.clicks)
+
+    if (code.clicks == code.prize):
+        print(121)
+        return redirect('/prize/')
     return redirect('/')
 
 
@@ -32,3 +35,7 @@ def displayView(request):
     else:
         code = Code.objects.first()
     return render(request, 'displayView.html', {'code':code})
+
+def prize (request):
+    code = Code.objects.first()
+    return render(request, 'prize.html', {'code':code})

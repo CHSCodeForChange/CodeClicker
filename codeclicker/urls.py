@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.userView),
     url(r'^click/', views.click),
+    url(r'^prize/', views.prize),
     url(r'^display/', views.displayView),
 ]
