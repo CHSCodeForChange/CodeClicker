@@ -15,36 +15,46 @@
   <body>
 
     <div class="row">
-      <div class="col-md-6">
-        <h1 class="display-1 text-center">Code For Change</h1>
+      <div class="col-md-5">
+        <h1 class="display-1 text-center" style="font-size: 6vw;">Code For Change</h1>
         <img class="img-thumbnail mx-auto d-block" src="/static/logo.png"></img>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-7">
         <h1 class="display-3 text-center" style="padding-top: 1%;">Code Clicker</h1>
-        <h1 class="text-center" style="padding-top: 5%; font-size: 800%;" id="clicks">Clicks: {{code.clicks}}</h1>
-        <p class="text-center" style="font-size: 300%;">Every {{code.prize}}th clicker gets a prize!</p>
-        <br><br><br>
-        <h3>Leaderboard</h3>
-        <table class="table table-hover" id="leaderboard">
+        <h1 class="text-center" style="padding-top: 0%; font-size: 9vw;" id="clicks">Clicks: {{code.clicks}}</h1>
+        <!-- <p class="text-center" style="font-size: 300%;">Every {{code.prize}}th clicker gets a prize!</p> -->
+        <br><br>
+        <h3 class="text-center" style="font-size: 3.5vw;"> Leaderboard</h3>
+        <table class="table table-hover" style="font-size: 2vw;" id="leaderboard">
+            <thead>
+              <th>Position</th>
+              <th>Username</th>
+              <th>Clicks</th>
+            </thead>
             <tbody>
               <tr>
                   <td>1</td>
+                  <td>-</td>
                   <td>-</td>
               </tr>
               <tr>
                   <td>2</td>
                   <td>-</td>
+                  <td>-</td>
               </tr>
               <tr>
                   <td>3</td>
+                  <td>-</td>
                   <td>-</td>
               </tr>
               <tr>
                   <td>4</td>
                   <td>-</td>
+                  <td>-</td>
               </tr>
               <tr>
                   <td>5</td>
+                  <td>-</td>
                   <td>-</td>
               </tr>
           </tbody>
@@ -79,8 +89,10 @@
                   return $(this).find('td').first().text() == index + 1;
                 });
 
-                obj = $(row).find('td').first().next();
-                $(obj).text(result[index].name)
+                obj = $(row).find('td').first();
+                $(obj).next().text(result[index].name)
+                $(obj).next().next().text(result[index].clicks);
+
               });
             }});
           }
