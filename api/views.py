@@ -54,7 +54,7 @@ def get_leaderboard(request):
     return Response(serializer.data)
 
 def get_client_ip(request):
-    return request.META['HTTP_X_FORWARDED_FOR']  
+    return request.META['REMOTE_ADDR']
 
 
 
