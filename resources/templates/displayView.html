@@ -81,7 +81,6 @@
 
                 obj = $(row).find('td').first().next();
                 $(obj).text(result[index].name)
-                // console.log($('table').find('tbody').find('tr:eq(' + 1 + ')').find('tr:eq(' + 0 + ')').text());
               });
             }});
           }
@@ -89,7 +88,7 @@
           function update() {
             getTotalClicks();
             getLeaderboard();
-            // setTimeout(update, interval);
+            setTimeout(update, interval);
           }
   
           setTimeout(update, interval);
