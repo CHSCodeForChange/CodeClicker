@@ -34,14 +34,16 @@
       $(document).ready(function() {
         var interval = 1000;
 
+
+
         function getTotalClicks() {
-          var url = "http://127.0.0.1:8000/api/click_data/?format=json";
+          var url = "/api/click_data/?format=json";
           $.ajax({url: url, success: function(result){
             $('#total-clicks').text("Total: " + result.clicks);
           }});
         }
         function getUserClicks() {
-          var url = "http://127.0.0.1:8000/api/user_data/?format=json";
+          var url = "/api/user_data/?format=json";
           $.ajax({url: url, success: function(result){
             $('#user-clicks').text("Clicks: " + result.clicks);
           }});
@@ -49,7 +51,7 @@
 
         function click() {
           nickname = $('#nickname').val();
-          var url = "http://127.0.0.1:8000/api/click";
+          var url = "/api/click";
 
           if (nickname != "") {
             url += "/?name=" + nickname;

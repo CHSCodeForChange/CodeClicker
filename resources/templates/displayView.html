@@ -63,14 +63,14 @@
           var interval = 1000;
   
           function getTotalClicks() {
-            var url = "http://127.0.0.1:8000/api/click_data/?format=json";
+            var url = "/api/click_data/?format=json";
             $.ajax({url: url, success: function(result){
               $('#clicks').text("Clicks: " + result.clicks);
             }});
           }
 
           function getLeaderboard() {
-            var url = "http://127.0.0.1:8000/api/leaderboard/?format=json";
+            var url = "/api/leaderboard/?format=json";
             $.ajax({url: url, success: function(result){
               $(result).each(function(index){
                 console.log(result[index].name);

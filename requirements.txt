@@ -1,6 +1,10 @@
-Jinja2==2.10
-django==1.11.7
-gunicorn==19.7.1
+-i https://pypi.org/simple
 dj-database-url==0.4.2
+django==1.11.9
+djangorestframework==3.8.2
+gunicorn==19.7.1
+jinja2==2.10
+markupsafe==1.0
 psycopg2-binary==2.7.4
+pytz==2018.5
 whitenoise==3.3.1
