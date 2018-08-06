@@ -6,7 +6,6 @@ class UserSer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('pk',
-                    'ip',
                     'name',
                     'clicks',
                 )

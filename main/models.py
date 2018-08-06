@@ -8,6 +8,8 @@ class Code(models.Model):
 
 
 class User(models.Model):
-    ip = models.GenericIPAddressField(null=False)
     name = models.CharField(max_length=240, null=False, blank=False, default="Anonymous")
     clicks = models.IntegerField(null=True, blank=False, default=0)
+
+    def __str__ (self):
+        return self.name

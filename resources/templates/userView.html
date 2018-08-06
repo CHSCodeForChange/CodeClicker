@@ -34,18 +34,16 @@
       $(document).ready(function() {
         var interval = 1000;
 
-
-
         function getTotalClicks() {
-          var url = "/api/click_data/?format=json";
+          var url = "/api/click_data";
           $.ajax({url: url, success: function(result){
-            $('#total-clicks').text("Total: " + result.clicks);
+            $('#total-clicks').text("Total: " + result);
           }});
         }
         function getUserClicks() {
-          var url = "/api/user_data/?format=json";
+          var url = "/api/user_data";
           $.ajax({url: url, success: function(result){
-            $('#user-clicks').text("Clicks: " + result.clicks);
+            $('#user-clicks').text("Clicks: " + result);
           }});
         }
 
@@ -56,7 +54,9 @@
           if (nickname != "") {
             url += "/?name=" + nickname;
           }
-          $.ajax({url: url, success: function(result){}});
+          $.ajax({url: url, success: function(result){
+            $('#user-clicks').text("Clicks: " + result);
+          }});
         }
 
         function loopGetTotalClicks() {
@@ -70,10 +70,9 @@
         
         $('#click-target').click(function() {
           click();
-          getUserClicks();
         });
 
-        setTimeout(loopGetTotalClicks, interval);
+        // setTimeout(loopGetTotalClicks, interval);
       });
     </script>
 

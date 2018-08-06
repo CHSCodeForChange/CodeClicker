@@ -56,6 +56,8 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
 ROOT_URLCONF = 'codeclicker.urls'
 
 TEMPLATES = [

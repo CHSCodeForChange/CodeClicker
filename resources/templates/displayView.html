@@ -63,9 +63,9 @@
           var interval = 1000;
   
           function getTotalClicks() {
-            var url = "/api/click_data/?format=json";
+            var url = "/api/click_data";
             $.ajax({url: url, success: function(result){
-              $('#clicks').text("Clicks: " + result.clicks);
+              $('#clicks').text("Clicks: " + result);
             }});
           }
 

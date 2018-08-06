@@ -1,50 +1,44 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from main.models import Code, User
-from .serializers import CodeSer, UserSer
+from .serializers import UserSer
 
 
 @api_view(['GET'])
 def post_click(request):
-    name = request.GET.get('name')
-    ip = get_client_ip(request)
-
-    user = User.objects.filter(ip=ip).first()
-    clicks = Code.objects.all().first()
-
+    user = get_user(request)
     user.clicks = user.clicks + 1;
     user.save()
 
+    clicks = Code.objects.all().first()
     clicks.clicks = clicks.clicks + 1;
     clicks.save()
 
+    name = request.GET.get('name')
     if name is not None and name != '/' and user.name != name:
         user.name = name
         user.save()
 
-    return Response()
+    response = HttpResponse(user.clicks)
+    response.set_cookie('user_id', user.id)
+    print(user.id)
+    return response
 
 
 @api_view(['GET'])
 def get_code_data(request):
     clicks = Code.objects.all().first()
-    serializer = CodeSer(clicks)
-    return Response(serializer.data, template_name="api.html")
+    return HttpResponse(clicks.clicks)
 
 @api_view(['GET'])
 def get_user_data(request):
-    ip = get_client_ip(request)
-    user = User.objects.filter(ip=ip).first()
-    
-    if user is None:
-        user = User(ip=ip)
-        user.save()
-
-    serializer = UserSer(user)
-    return Response(serializer.data)
+    user = get_user(request)
+    response = HttpResponse(user.clicks)
+    response.set_cookie('user_id', user.id)
+    return response
 
 @api_view(['GET'])
 def get_leaderboard(request):
@@ -52,9 +46,19 @@ def get_leaderboard(request):
 
     serializer = UserSer(user, many=True)
     return Response(serializer.data)
-
-def get_client_ip(request):
     return request.META['REMOTE_ADDR']
 
 
 
+def get_user(request):
+    pk = request.COOKIES.get('user_id')
+    if (pk is None):
+        user = User()
+        user.save()
+    else:
+        try: 
+            user = User.objects.get(id=pk)
+        except: 
+            user = User()
+            user.save()
+    return user
