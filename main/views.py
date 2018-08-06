@@ -5,18 +5,18 @@ from .models import Code
 
 
 # Sending user object to the form, to verify which fields to display/remove (depending on group)
-def click(request):
-    if Code.objects.count() == 0:
-        code = Code.objects.create()
-        # You can do something here as this should be the first person
-    else:
-        code = Code.objects.first()
-    code.clicks = code.clicks + 1
-    code.save()
+# def click(request):
+#     if Code.objects.count() == 0:
+#         code = Code.objects.create()
+#         # You can do something here as this should be the first person
+#     else:
+#         code = Code.objects.first()
+#     code.clicks = code.clicks + 1
+#     code.save()
 
-    if (code.prize != 0 and code.clicks % code.prize == 0):
-        return prize(request)
-    return redirect('/')
+#     if (code.prize != 0 and code.clicks % code.prize == 0):
+#         return prize(request)
+#     return redirect('/')
 
 
 def userView(request):

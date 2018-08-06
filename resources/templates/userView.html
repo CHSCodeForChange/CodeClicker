@@ -10,27 +10,74 @@
 
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/user.css">
   </head>
 
   <body>
 
-    <h1 class="display-4 text-center">Code for Change: Code Clicker</h1>
-    <a href="/click"><img class="img-thumbnail mx-auto d-block" src="/static/logo.png"></img></a>
-    <h1 class="text-center">Clicks: {{code.clicks}}</h1>
+    <h1 class="display-4 text-center">Code Clicker</h1>
+    <img class="img-thumbnail mx-auto d-block" src="/static/logo.png" id="click-target"></img>
+    <div class="name-input"><input placeholder="Enter Nickname" id="nickname"></input></div>
+    <h1 class="text-center" id="user-clicks"></h1>
+    <h5 class="text-center" id="total-clicks"></h5>
 
     <p class="text-center">Code For Change 2018</p>
 
 
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        var interval = 1000;
+
+        function getTotalClicks() {
+          var url = "http://127.0.0.1:8000/api/click_data/?format=json";
+          $.ajax({url: url, success: function(result){
+            $('#total-clicks').text("Total: " + result.clicks);
+          }});
+        }
+        function getUserClicks() {
+          var url = "http://127.0.0.1:8000/api/user_data/?format=json";
+          $.ajax({url: url, success: function(result){
+            $('#user-clicks').text("Clicks: " + result.clicks);
+          }});
+        }
+
+        function click() {
+          nickname = $('#nickname').val();
+          var url = "http://127.0.0.1:8000/api/click";
+
+          if (nickname != "") {
+            url += "/?name=" + nickname;
+          }
+          $.ajax({url: url, success: function(result){}});
+        }
+
+        function loopGetTotalClicks() {
+          getTotalClicks();
+          setTimeout(loopGetTotalClicks, interval);
+        }
 
 
+        getTotalClicks();
+        getUserClicks();
+        
+        $('#click-target').click(function() {
+          click();
+          getUserClicks();
+        });
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        setTimeout(loopGetTotalClicks, 1000);
+      });
+    </script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script src="/static/js/header.js"></script>
   </body>
 </html>

@@ -21,7 +21,7 @@ def post_click(request):
     clicks.clicks = clicks.clicks + 1;
     clicks.save()
 
-    if name is not None and name != '/':
+    if name is not None and name != '/' and user.name != name:
         user.name = name
         user.save()
 
@@ -33,7 +33,7 @@ def get_code_data(request):
     clicks = Code.objects.all().first()
     serializer = CodeSer(clicks)
     return Response(serializer.data, template_name="api.html")
-    
+
 @api_view(['GET', 'POST'])
 def get_user_data(request):
     ip = get_client_ip(request)

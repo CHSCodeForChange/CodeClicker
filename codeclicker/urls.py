@@ -20,7 +20,7 @@ from main import views as views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.userView),
-    url(r'^click/', views.click),
+    # url(r'^click/', views.click),
     url(r'^display/', views.displayView),
     url(r'^api/', include('api.urls')),
 ]
