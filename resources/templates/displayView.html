@@ -69,43 +69,43 @@
     </script>
 
     <script>
-        $(document).ready(function() {
-          var interval = 1000;
-  
-          function getTotalClicks() {
-            var url = "/api/click_data";
-            $.ajax({url: url, success: function(result){
-              $('#clicks').text("Clicks: " + result);
-            }});
-          }
+      $(document).ready(function() {
+        var interval = 1000;
 
-          function getLeaderboard() {
-            var url = "/api/leaderboard/?format=json";
-            $.ajax({url: url, success: function(result){
-              $(result).each(function(index){
-                console.log(result[index].name);
-                
-                row = $('table').find('tbody').find('tr').filter(function() {
-                  return $(this).find('td').first().text() == index + 1;
-                });
+        function getTotalClicks() {
+          var url = "/api/click_data";
+          $.ajax({url: url, success: function(result){
+            $('#clicks').text("Clicks: " + result);
+          }});
+        }
 
-                obj = $(row).find('td').first();
-                $(obj).next().text(result[index].name)
-                $(obj).next().next().text(result[index].clicks);
-
+        function getLeaderboard() {
+          var url = "/api/leaderboard/?format=json";
+          $.ajax({url: url, success: function(result){
+            $(result).each(function(index){
+              console.log(result[index].name);
+              
+              row = $('table').find('tbody').find('tr').filter(function() {
+                return $(this).find('td').first().text() == index + 1;
               });
-            }});
-          }
 
-          function update() {
-            getTotalClicks();
-            getLeaderboard();
-            setTimeout(update, interval);
-          }
-  
+              obj = $(row).find('td').first();
+              $(obj).next().text(result[index].name)
+              $(obj).next().next().text(result[index].clicks);
+
+            });
+          }});
+        }
+
+        function update() {
+          getTotalClicks();
+          getLeaderboard();
           setTimeout(update, interval);
-        });
-      </script>
+        }
+
+        setTimeout(update, interval);
+      });
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
