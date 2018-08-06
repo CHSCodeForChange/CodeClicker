@@ -49,16 +49,12 @@ def get_user_data(request):
 @api_view(['GET'])
 def get_leaderboard(request):
     user = User.objects.all().order_by('-clicks')[:5]
-    
+
     serializer = UserSer(user, many=True)
     return Response(serializer.data)
 
 def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
+    return request.META['HTTP_X_FORWARDED_FOR']  
+
 
 
