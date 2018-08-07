@@ -14,7 +14,21 @@
   </head>
 
   <body>
-
+    <div class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Congradulations</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>You won the prize!</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <h1 class="display-4 text-center">Code Clicker</h1>
     <img class="img-thumbnail mx-auto d-block" src="/static/logo.png" id="click-target"></img>
     <div class="name-input"><input placeholder="Enter Nickname" id="nickname"></input></div>
@@ -55,9 +69,17 @@
             url += "/?name=" + nickname;
           }
           $.ajax({url: url, success: function(result){
-            $('#user-clicks').text("Clicks: " + result);
+            result = jQuery.parseJSON(result);
+            $('#user-clicks').text("Clicks: " + result[0]);
+            if (result[1] == true) {
+              $('.modal').css({'display': 'inline'});
+            }
           }});
         }
+
+        $('.close').click(function () {
+          $(this).parent().parent().parent().parent().css({'display': 'none'});
+        });
 
         function loopGetTotalClicks() {
           getTotalClicks();

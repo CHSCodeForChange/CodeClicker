@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from main.models import Code, User
 from .serializers import UserSer
 
+import json
+
 
 @api_view(['GET'])
 def post_click(request):
@@ -22,7 +24,13 @@ def post_click(request):
         user.name = name
         user.save()
 
-    response = HttpResponse(user.clicks)
+    data = []
+    data.append(user.clicks)
+
+    if clicks.prize != 0:
+        data.append(user.clicks % clicks.prize == 0)
+
+    response = HttpResponse(json.dumps(data))
     response.set_cookie('user_id', user.id)
     print(user.id)
     return response
