@@ -17,10 +17,8 @@ def post_click(request):
 
     clicks = Code.objects.all().first()
     clicks.clicks = clicks.clicks + 1;
+    clicks.prize = 250
     clicks.save()
-
-	clicks.prize = 250;
-    clicks.save();
 
     name = request.GET.get('name')
     if name is not None and name != '/' and user.name != name:
@@ -67,9 +65,9 @@ def get_user(request):
         user = User()
         user.save()
     else:
-        try: 
+        try:
             user = User.objects.get(id=pk)
-        except: 
+        except:
             user = User()
             user.save()
     return user
