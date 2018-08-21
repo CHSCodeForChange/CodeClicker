@@ -32,7 +32,7 @@ def post_click(request):
 
     response = HttpResponse(json.dumps(data))
     response.set_cookie('user_id', user.id)
-    print(user.id)
+
     return response
 
 

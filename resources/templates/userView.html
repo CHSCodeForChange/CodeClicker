@@ -18,7 +18,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Congradulations</h5>
+            <h5 class="modal-title">Congratulations</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -71,6 +71,7 @@
           $.ajax({url: url, success: function(result){
             result = jQuery.parseJSON(result);
             $('#user-clicks').text("Clicks: " + result[0]);
+            $('#total-clicks').text("Total: " + (parseInt($('#total-clicks').text().substring(7), 10)+1));
             if (result[1] == true) {
               $('.modal').css({'display': 'inline'});
             }
