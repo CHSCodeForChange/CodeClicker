@@ -28,7 +28,7 @@ def post_click(request):
     data.append(user.clicks)
 
     if clicks.prize != 0:
-        data.append(user.clicks % clicks.prize == 0)
+        data.append(clicks.clicks % clicks.prize == 0)
 
     response = HttpResponse(json.dumps(data))
     response.set_cookie('user_id', user.id)
