@@ -19,6 +19,9 @@ def post_click(request):
     clicks.clicks = clicks.clicks + 1;
     clicks.save()
 
+	clicks.prize = 250;
+    clicks.save();
+
     name = request.GET.get('name')
     if name is not None and name != '/' and user.name != name:
         user.name = name
