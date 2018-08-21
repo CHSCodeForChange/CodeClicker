@@ -78,7 +78,7 @@
           }});
         }
 
-        $('.close').mousedown(function () {
+        $('.close').click(function () {
           $(this).parent().parent().parent().parent().css({'display': 'none'});
         });
 
@@ -91,7 +91,7 @@
         getTotalClicks();
         getUserClicks();
         
-        $('#click-target').click(function() {
+        $('#click-target').mousedown(function() {
           click();
         });
 
